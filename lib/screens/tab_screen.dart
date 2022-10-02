@@ -45,32 +45,44 @@ void _selectPage(int index){
   @override
   Widget build(BuildContext context) {
     var favoriteMeal = widget.favoriteMeals;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_pages[_selectedPageIndex]['title']),
-      ),
-      drawer: MainDrawer(),
-      body: _pages[_selectedPageIndex]['page'],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectPage,
-        backgroundColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: Theme.of(context).colorScheme.secondary,
-        currentIndex: _selectedPageIndex,
-        // type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            label: 'Categories',
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.category),
-          ),
-          BottomNavigationBarItem(
-            label: 'Favorites',
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.star),
-          ),
-        ],
+Future<bool> _onBackPressed() async {
+        return await showDialog(
+            context: context, builder: (context) => AlertDialog(
+  title: Text('Are Sure You Want To Exit?', textScaleFactor: 1),
+  actions: <Widget>[
+    TextButton(child: Text('Yes'), onPressed: () {Navigator.of(context).pop(true);}),
+    TextButton(child: Text('No'), onPressed: () {Navigator.of(context).pop(false);}),
+  ],
+)
+);
+      }
+    return WillPopScope(onWillPop: _onBackPressed,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(_pages[_selectedPageIndex]['title']),
+        ),
+        drawer: MainDrawer(),
+        body: _pages[_selectedPageIndex]['page'],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: _selectPage,
+          backgroundColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Theme.of(context).colorScheme.secondary,
+          currentIndex: _selectedPageIndex,
+          // type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+              label: 'Categories',
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.category),
+            ),
+            BottomNavigationBarItem(
+              label: 'Favorites',
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: Icon(Icons.star),
+            ),
+          ],
+        ),
       ),
     );
   }

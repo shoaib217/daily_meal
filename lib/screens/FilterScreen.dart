@@ -42,7 +42,7 @@ class _FilterScreenState extends State<FilterScreen> {
         title: const Text('Your Filter'),
         actions: [IconButton(onPressed:() {
           widget.saveFilter(filter);
-          Navigator.of(context).pushNamed('/');
+          Navigator.of(context).pushReplacementNamed('/');
         } , icon: Icon(Icons.save,color: Colors.white,))]
       ),
       body: Column(
