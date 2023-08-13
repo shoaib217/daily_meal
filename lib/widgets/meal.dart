@@ -9,16 +9,16 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
-  final Function removeMeal;
+  Function removeMeal;
 
-  const MealItem(
-      {@required this.id,
-      @required this.title,
-      @required this.imageUrl,
-      @required this.duration,
-      @required this.complexity,
-      @required this.affordability,
-      @required this.removeMeal});
+  MealItem(
+       this.removeMeal,{Key? key, required this.id,
+      required this.title,
+      required this.imageUrl,
+      required this.duration,
+      required this.complexity,
+      required this.affordability,
+      }) : super(key: key);
 
   String get complexityText {
     /* var text = '';

@@ -17,7 +17,7 @@ TabsScreen(this.favoriteMeals);
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-List<Map<String,Object>> _pages;
+late List<Map<String,Object>> _pages;
 
 @override
   void initState() {
@@ -50,8 +50,8 @@ Future<bool> _onBackPressed() async {
             context: context, builder: (context) => AlertDialog(
   title: Text('Are Sure You Want To Exit?', textScaleFactor: 1),
   actions: <Widget>[
-    TextButton(child: Text('Yes'), onPressed: () {Navigator.of(context).pop(true);}),
-    TextButton(child: Text('No'), onPressed: () {Navigator.of(context).pop(false);}),
+    TextButton(child: const Text('No'), onPressed: () {Navigator.of(context).pop(false);}),
+    TextButton(child: const Text('Yes'), onPressed: () {Navigator.of(context).pop(true);}),
   ],
 )
 );
@@ -59,10 +59,10 @@ Future<bool> _onBackPressed() async {
     return WillPopScope(onWillPop: _onBackPressed,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(_pages[_selectedPageIndex]['title']),
+          title: Text(_pages[_selectedPageIndex]['title'] as String),
         ),
-        drawer: MainDrawer(),
-        body: _pages[_selectedPageIndex]['page'],
+        drawer: const MainDrawer(),
+        body: _pages[_selectedPageIndex]['page'] as Widget,
         bottomNavigationBar: BottomNavigationBar(
           onTap: _selectPage,
           backgroundColor: Theme.of(context).primaryColor,
@@ -79,7 +79,7 @@ Future<bool> _onBackPressed() async {
             BottomNavigationBarItem(
               label: 'Favorites',
               backgroundColor: Theme.of(context).primaryColor,
-              icon: Icon(Icons.star),
+              icon: const Icon(Icons.star),
             ),
           ],
         ),

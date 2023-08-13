@@ -13,23 +13,23 @@ CategoryMealScreen(this.availableMeals);
 }
 
 class _CategoryMealScreenState extends State<CategoryMealScreen> {
-  String categoryTitle;
-  List<Meal> displayItem;
+  late String categoryTitle;
+  late List<Meal> displayItem;
 
   @override
   void didChangeDependencies() {
     final routeArg =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
+        ModalRoute.of(context)?.settings.arguments as Map<String, String>;
 
     final categoryId = routeArg['id'];
-    categoryTitle = routeArg['title'];
+    categoryTitle = routeArg['title']!;
     displayItem = widget.availableMeals.where(((meal) {
       return meal.categories.contains(categoryId);
     })).toList();
     super.didChangeDependencies();
   }
 
-  Function _removeMeal(String mealId) {
+  void _removeMeal(String mealId) {
       print(mealId);
       setState(() {
         displayItem.removeWhere((element) => element.id == mealId);
@@ -46,13 +46,13 @@ class _CategoryMealScreenState extends State<CategoryMealScreen> {
       body: ListView.builder(
         itemBuilder: ((context, index) {
           return MealItem(
+            _removeMeal,
             id: displayItem[index].id,
             title: displayItem[index].title,
             imageUrl: displayItem[index].imageUrl,
             duration: displayItem[index].duration,
             complexity: displayItem[index].complexity,
             affordability: displayItem[index].affordability,
-            removeMeal: _removeMeal,
           );
         }),
         itemCount: displayItem.length,

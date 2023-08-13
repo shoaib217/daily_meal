@@ -1,9 +1,8 @@
 import '../main.dart';
-import '../screens/FilterScreen.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key key}) : super(key: key);
+  const MainDrawer({Key? key}) : super(key: key);
 
   Widget buildListTile(String title,IconData icon,Function tapHandler){
     return ListTile(
@@ -15,7 +14,9 @@ class MainDrawer extends StatelessWidget {
         fontWeight: FontWeight.bold,
       ),
       ),
-      onTap: tapHandler,
+      onTap: () {
+         tapHandler();
+      },
     );
   }
 

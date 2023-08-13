@@ -53,6 +53,16 @@ android {
         versionName flutterVersionName
     }
 
+android.applicationVariants.all { variant ->
+    variant.outputs.all { output ->
+        def builtType = variant.buildType.name
+        def versionName = variant.versionName
+        def versionCode = variant.versionCode
+        def flavor = variant.flavorName
+        outputFileName = "MealApp-${flavor}-${builtType}-${versionName}-${versionCode}.apk"
+    }
+}
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

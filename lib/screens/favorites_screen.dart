@@ -16,6 +16,7 @@ FavoritesScreen(this._favoriteMeals);
       return ListView.builder(
         itemBuilder: ((context, index) {
           return MealItem(
+            (){},
             id: _favoriteMeals[index].id,
             title: _favoriteMeals[index].title,
             imageUrl: _favoriteMeals[index].imageUrl,

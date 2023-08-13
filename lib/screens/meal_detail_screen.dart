@@ -29,7 +29,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> buildSnackBar(String t
               widget.setFavorite(false, mealId);
             });
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.star,
             color: Colors.yellow,
           ));
@@ -41,7 +41,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> buildSnackBar(String t
               widget.setFavorite(true, mealId);
             });
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.star_border,
           ));
     }
@@ -59,7 +59,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> buildSnackBar(String t
 
   @override
   Widget build(BuildContext context) {
-    final mealId = ModalRoute.of(context).settings.arguments as String;
+    final mealId = ModalRoute.of(context)?.settings.arguments as String;
     final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
     return Scaffold(
       appBar: AppBar(
@@ -124,13 +124,11 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> buildSnackBar(String t
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: IconButton(
-          icon: Icon(Icons.delete),
-        ),
         backgroundColor: Colors.red,
         onPressed: () {
           Navigator.of(context).pop(mealId);
         },
+        child: const Icon(Icons.delete),
       ),
     );
   }
